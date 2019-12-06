@@ -1,0 +1,32 @@
+.topbar{
+    background-color:#183552;
+    z-index:99
+}
+
+.info-board{
+    overflow:hidden;
+    position:relative;
+    width:100%;
+    background-color:#ddd;
+    font-weight:600;
+    color:#964409;
+    text-transform:uppercase
+}
+.topbar .user{
+    position:relative
+}
+.topbar .user .user_name{
+    color:#ddd
+}
+.user_name span{
+    color:#ff7a1a
+}
+.h6, h6 {
+    font-size: xx-large;
+    color: white;
+    margin-left: 45%;
+    margin-right: 42%;
+}
+.logout{
+    float: right;
+}   

@@ -1,0 +1,21 @@
+<div id="main-wrapper">
+	<header class="topbar animated fadeInDown" id="navbar">
+		<div class="heading">
+			<h6>Simple Site</h6>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="user">
+					<div class="user_name">
+						Welcome <span>{{ authService?.currentUser?.name }}</span>!
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="logout">
+					<button *ngIf="authService.isLoggedIn()" class="btn btn-info waves-effect waves-dark" (click)="authService.logout()"><span class="hide-menu">Logout</span></button>
+				</div>
+			</div>
+		</div>
+	</header>	
+</div>
