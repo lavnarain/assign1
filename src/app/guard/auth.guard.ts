@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree,Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-
+import { Cookie } from "ng2-cookies";
+import {Constant} from '../helpers/constants'
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +12,14 @@ export class AuthGuard implements CanActivate {
   isLoggedRes:any;
   userStateRes:any;
   userState:any;
-  constructor(private router: Router, private cookieService: CookieService) { }
+  constructor(private router: Router) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.isLoggedRes = localStorage.getItem('constantVariable.isLoggedIn')
-    this.isLoggedIn = JSON.parse(this.isLoggedRes);
-    this.userStateRes = localStorage.getItem('constantVariable.currentUserStates');
-    if(this.isLoggedRes){
-      if(this.isLoggedIn){
-          // this.router.navigate(['/myprofile']);
-          return true;
-      }else{
-          this.router.navigate(['/login']);
+  canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      let token = Cookie.get(Constant.COOKIE_KEY_NAME);
+      if (token) {
+        return true;
+      } else {
+        this.router.navigate(['/login']);
       }
-    }else{
-      console.log('localStorage isLoggedIn undefied');
-      this.router.navigate(['/login']);
     }
-  }
 }

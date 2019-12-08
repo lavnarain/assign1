@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MockBackend } from '@angular/http/testing';
-import { fakeBackendProvider } from './helpers/fake-backend';
+import { serverProvider } from './helpers/server';
 import { HttpModule, Http, BaseRequestOptions } from '@angular/http';
-import { AuthHttp, AUTH_PROVIDERS, provideAuth, AuthConfig } from 'angular2-jwt/angular2-jwt';
+// import { AuthHttp, AUTH_PROVIDERS, provideAuth, AuthConfig } from 'angular2-jwt';
 
 
 //components
@@ -30,11 +30,11 @@ import {AuthenticationService} from './service/authentication.service';
 import { AuthGuard } from './guard/auth.guard';
 
 
-export function getAuthHttp(http) {
-  return new AuthHttp(new AuthConfig({
-    tokenName: 'token'
-  }), http);
-}
+// export function getAuthHttp(http) {
+//   return new AuthHttp(new AuthConfig({
+//     tokenName: 'token'
+//   }), http);
+// }
 
 @NgModule({
   declarations: [
@@ -63,14 +63,15 @@ export function getAuthHttp(http) {
   providers: [
     AuthenticationService,
     AuthGuard,
-    AuthHttp,
-    {
-      provide: AuthHttp,
-      useFactory: getAuthHttp,
-      deps: [Http]
-    },
+    // AuthHttp,
+    // {
+    //   provide: AuthHttp,
+    //   useFactory: getAuthHttp,
+    //   deps: [Http]
+    // },
+
     //mock authentication is here
-    fakeBackendProvider,
+    serverProvider,
     MockBackend,
     BaseRequestOptions
   ],
